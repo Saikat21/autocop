@@ -16,7 +16,7 @@ public class ViolationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_violation);
         ctx = this;
-        final Button btnHistory = (Button) findViewById(R.id.history);
+        Button btnHistory = (Button) findViewById(R.id.history);
         btnHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -26,8 +26,28 @@ public class ViolationActivity extends AppCompatActivity {
             }
         });
 
-        final Button btnTrack = (Button) findViewById(R.id.active_track);
+        Button btnTrack = (Button) findViewById(R.id.active_track);
         btnTrack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ctx, MapsActivity.class);
+                startActivity(i);
+                //finish();
+            }
+        });
+
+        Button btnWarn = (Button) findViewById(R.id.warn_driver);
+        btnWarn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ctx, WarnActivity.class);
+                startActivity(i);
+                //finish();
+            }
+        });
+
+        Button btnSpeed = (Button) findViewById(R.id.check_speed);
+        btnSpeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ctx, MapsActivity.class);
