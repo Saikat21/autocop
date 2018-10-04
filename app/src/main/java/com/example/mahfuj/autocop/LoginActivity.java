@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity  {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private Button sign_up;
 
     Context ctx;
     @Override
@@ -59,6 +60,14 @@ public class LoginActivity extends AppCompatActivity  {
         ctx = this;
         // Set up the login form.
         mUserView = (AutoCompleteTextView) findViewById(R.id.user);
+        sign_up=(Button) findViewById(R.id.sign_up_req);
+        sign_up.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i= new Intent(ctx, SignupActivity.class);
+                startActivity(i);
+            }
+        });
 
 
         mPasswordView = (EditText) findViewById(R.id.password);
