@@ -53,17 +53,28 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/veh_no"
+                android:hint="vehicle No"
+                android:inputType="text"
+                android:layout_marginTop="5dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/email_adds"
                 android:hint="email address"
                 android:inputType="textEmailAddress"
                 android:layout_marginTop="5dp"/>
             <EditText
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/veh_no"
-                android:hint="vehicle No"
-                android:inputType="text"
-                android:layout_marginTop="5dp"/>
+                android:hint="Password"
+                android:imeActionId="6"
+                android:imeActionLabel="SignIn"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true" />
             <ImageView
                 android:id="@+id/textView"
                 android:layout_width="60dp"
