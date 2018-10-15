@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class HistoryActivity extends AppCompatActivity {
+    private FirebaseAuth = mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
