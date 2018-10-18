@@ -4,25 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="15dp"
-    tools:context=".ProfileActivity">
-    
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Profile Information"
-        android:layout_marginTop="12dp"
-        android:textSize="24dp"
-        android:layout_gravity="center"
-        android:gravity="center"/>
+    tools:context=".ProfileActivity"
+    android:padding="10dp"
+    android:orientation="vertical">
 
     <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/lst"
-        android:layout_marginTop="12dp">
-
-    </ListView>
+        android:id="@+id/memList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
