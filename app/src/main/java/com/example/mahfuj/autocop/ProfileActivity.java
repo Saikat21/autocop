@@ -1,9 +1,12 @@
 package com.example.mahfuj.autocop;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -14,43 +17,56 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
-    private ListView userList;
-    private ArrayList<RegistrationInfo> userInfo;
-    private DatabaseReference databaseReference;
-    Context ctx;
+
+    private ListView memList;
+
+    FirebaseDatabase database;
+    DatabaseReference ref;
+    ArrayList<String> list;
+    ArrayAdapter<String> adapter;
+    profile_info member;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        userList=(ListView)findViewById(R.id.lst);
-        userInfo=new ArrayList<>();
-        databaseReference= FirebaseDatabase.getInstance().getReference("autocop");
-        getAllDataFromDB();
+        memList = findViewById(R.id.memList);
+        member = new profile_info();
+        database = FirebaseDatabase.getInstance();
+        ref = database.getReference("Users");
+        list = new ArrayList<>();
+        adapter = new ArrayAdapter<>(this, R.layout.user_info, R.id.userInfo, list);
 
-    }
-
-    private void getAllDataFromDB() {
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot data: dataSnapshot.getChildren()){
-                    RegistrationInfo value = new RegistrationInfo();
-                    //value=data.getValue(RegistrationInfo.class);
-                    userInfo.add(value);
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    member = ds.getValue(profile_info.class);
+                    list.add(member.getEtEmail().toString()
+                            + "\n" + member.getEtFirstName().toString()
+                            + "\n" + member.getEtLastName().toString()
+                            + "\n" + member.getEtPhn().toString());
                 }
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                ProfileInfoAdapter profileInfoAdapter=new ProfileInfoAdapter(ProfileActivity.this,userInfo);
-                userList.setAdapter(profileInfoAdapter);
+                memList.setAdapter(adapter);
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                //Log.w(TAG, "Failed to read value.", error.toException());
+            public void onCancelled(DatabaseError databaseError) {
+
+                Toast.makeText(ProfileActivity.this, "Data Error", Toast.LENGTH_SHORT).show();
+
             }
         });
+
+        memList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                final String item = list.get(position);
+
+                Toast.makeText(ProfileActivity.this, "The clicked item is : " + "\n" + item, Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }
